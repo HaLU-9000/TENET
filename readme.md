@@ -2,7 +2,7 @@
 
 **TENET** is a fully unsupervised deep-learning framework for simultaneous deblurring, super-resolution (up to 12×), and semantic segmentation of two-photon microscopy (TPM) volumes in a single pass.
 
-> Morita H\*, Hayashi S\*, Tsuji T, Kato D, Wake H, Shimamura T. "Unsupervised deep learning enables blur-free resolution-enhancement in two-photon microscopy." *(Submitted to Cell Reports Methods)*
+> Morita H\*, Hayashi S, Tsuji T, Kato D, Wake H, Shimamura T. "Unsupervised deep learning enables blur-free resolution-enhancement in two-photon microscopy." *(Submitted to Cell Reports Methods)*
 
 ---
 
