@@ -95,7 +95,7 @@ Every training and inference run is controlled by a single **JSON config file** 
 ### Step 1 — Generate synthetic training data
 
 ```bash
-python data_generation/makedata.py
+python makedata.py <model_name>
 ```
 
 Generates random 3D volumes (spheres, cubes, octahedra, lines with elastic deformation) and blurs them with the initialized PSF. Output goes to the folder specified in `simulation_data_generation.dataset_name`.
