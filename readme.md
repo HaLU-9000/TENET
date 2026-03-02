@@ -95,15 +95,16 @@ Every training and inference run is controlled by a single **JSON config file** 
 ### Step 1 — Generate synthetic training data
 
 ```bash
-python makedata.py <model_name>
+python randomdataset_maker.py <model_name>
+python randomdataset_blurer.py <model_name>
 ```
+
 
 Generates random 3D volumes (spheres, cubes, octahedra, lines with elastic deformation) and blurs them with the initialized PSF. Output goes to the folder specified in `simulation_data_generation.dataset_name`.
 
 ### Step 2 — Pre-train on synthetic data
 
 ```bash
-cd training
 python train_runner.py <model_name>
 ```
 
