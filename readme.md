@@ -99,7 +99,6 @@ python randomdataset_maker.py <model_name>
 python randomdataset_blurer.py <model_name>
 ```
 
-
 Generates random 3D volumes (spheres, cubes, octahedra, lines with elastic deformation) and blurs them with the initialized PSF. Output goes to the folder specified in `simulation_data_generation.dataset_name`.
 
 ### Step 2 — Pre-train on synthetic data
@@ -135,14 +134,14 @@ Uses `train_dataset`, `val_dataset`, `pretrain_dataset` (for EWC), and `train_lo
 python training/finetuning.py JNet_beads
 
 # Cross-validation fold 1
-python training/finetuning.py JNet_beads
+python training/finetuning.py JNet_beads --cross_validation 1
 
 Saves to `model/<model_name>.pt`.
 
 ### Step 3b — Fine-tune with simulation data (alternative)
 
 ```bash
-python training/finetuning_with_simulation.py <model_name> [--train_with_align]
+python training/finetuning_with_simulation.py <model_name>
 ```
 
 Uses `pretrain_dataset` for both training and EWC (instead of real TPM data). Useful for the simulation experiment in Fig. 2 of the paper.
