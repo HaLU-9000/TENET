@@ -199,7 +199,7 @@ Training datasets for reproducing figure 3-5 manuscript figures:
 
 **[https://zenodo.org/records/15545449](https://zenodo.org/records/15545449)**
 
-All weights for 
+All weights are in `models` folder.
 
 Place downloaded model weights in `model/` and data folders in the root directory (matching the `folderpath` values in the config).
 
