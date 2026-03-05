@@ -1,5 +1,5 @@
 {
-    "explanation":"model for figure 4, microglia shape estimation demo.",
+    "explanation":"Model for Figure 2 a-c. trained with our simulation data.",
     "pretrained_model":"JNet_542_pretrain",
     "params":
         {
@@ -116,8 +116,8 @@
 
     "train_dataset":
         {
-            "folderpath"      : "/home/haruhiko/Downloads/Set_03_stackreg_z" ,
-            "size"            : [333,1024,1024]                   ,
+            "folderpath"      : "_var_num_realisticblur6"         ,
+            "size"            : [1200, 500, 500]                  ,
             "cropsize"        : [240, 112, 112]                   ,
             "I"               : 200                               ,
             "scale"           : 3                                 ,
@@ -131,8 +131,8 @@
 
     "val_dataset":
         {
-            "folderpath"      : "/home/haruhiko/Downloads/Set_03_stackreg_z" ,
-            "size"            : [333,1024,1024]                   ,
+            "folderpath"      : "_var_num_realisticblur6"         ,
+            "size"            : [1200, 500, 500]                  ,
             "cropsize"        : [240, 112, 112]                   ,
             "I"               : 20                                ,
             "scale"           : 3                                 ,
@@ -176,10 +176,10 @@
             "ploss_weight"      : 10.0           ,
             "mrfloss_order"     : 1              ,
             "mrfloss_dilation"  : 1              ,
-            "mrfloss_weights"   : {"l_00" : -1.0  ,
-                                   "l_01" : 1.0   ,
-                                   "l_10" : 2.0   ,
-                                   "l_11" : -2.0
+            "mrfloss_weights"   : {"l_00" : -0.5  ,
+                                   "l_01" :  0.5  ,
+                                   "l_10" :  1.0  ,
+                                   "l_11" : -1.0
                                    }                                                  
         }                                                                      , "$train_loop" : "",
     

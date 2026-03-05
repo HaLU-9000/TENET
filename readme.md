@@ -137,11 +137,7 @@ Uses `train_dataset`, `val_dataset`, `pretrain_dataset` (for EWC), and `train_lo
 python training/finetuning.py <model_name>
 
 # Cross-validation fold 1
-<<<<<<< HEAD
 python training/finetuning.py <model_name>
-=======
-python training/finetuning.py JNet_beads --cross_validation 1
->>>>>>> c5024be70343f74ebd62ba87124c163c280909d7
 
 Saves to `model/<model_name>.pt`.
 

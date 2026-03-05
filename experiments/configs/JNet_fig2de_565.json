@@ -1,5 +1,5 @@
 {
-    "explanation":"pretrain with vibration, angle00",
+    "explanation":"model for Figure 2 d,e; angle 90 (finetuning for simulation data of anisotropic, vertically-elongated structure only.)",
     "pretrained_model":"JNet_542_pretrain",
     "params":
         {
@@ -116,7 +116,7 @@
 
     "train_dataset":
         {
-            "folderpath"      : "/home/haruhiko/Documents/simulation_ad2/blurred_new/angle45"         ,
+            "folderpath"      : "/home/haruhiko/Documents/simulation_ad2/blurred_new/angle90"         ,
             "size"            : [900, 900, 900]                  ,
             "cropsize"        : [240, 112, 112]                   ,
             "I"               : 200                               ,
@@ -131,7 +131,7 @@
 
     "val_dataset":
         {
-            "folderpath"      : "/home/haruhiko/Documents/simulation_ad2/blurred_new/angle45"         ,
+            "folderpath"      : "/home/haruhiko/Documents/simulation_ad2/blurred_new/angle90"         ,
             "size"            : [900, 900, 900]                  ,
             "cropsize"        : [240, 112, 112]                   ,
             "I"               : 20                                ,
@@ -178,7 +178,7 @@
             "mrfloss_dilation"  : 1              ,
             "mrfloss_weights"   : {"l_00" : -0.5 ,
                                    "l_01" :  0.5 ,
-                                   "l_10" :  1.0 ,
+                                   "l_10" :  1.0  ,
                                    "l_11" : -1.0
                                    }                                                  
         }                                                                      , "$train_loop" : "",
