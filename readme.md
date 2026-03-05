@@ -98,7 +98,8 @@ Every training and inference run is controlled by a single **JSON config file** 
 ### Step 1 — Generate synthetic training data
 
 ```bash
-python makedata.py <model_name>
+python randomdataset_maker.py <model_name>
+python randomdataset_blurer.py <model_name>
 ```
 
 Generates random 3D volumes (spheres, cubes, octahedra, lines with elastic deformation) and blurs them with the initialized PSF. Output goes to the folder specified in `simulation_data_generation.dataset_name`.
@@ -106,7 +107,6 @@ Generates random 3D volumes (spheres, cubes, octahedra, lines with elastic defor
 ### Step 2 — Pre-train on synthetic data
 
 ```bash
-cd training
 python train_runner.py <model_name>
 ```
 
@@ -137,14 +137,18 @@ Uses `train_dataset`, `val_dataset`, `pretrain_dataset` (for EWC), and `train_lo
 python training/finetuning.py <model_name>
 
 # Cross-validation fold 1
+<<<<<<< HEAD
 python training/finetuning.py <model_name>
+=======
+python training/finetuning.py JNet_beads --cross_validation 1
+>>>>>>> c5024be70343f74ebd62ba87124c163c280909d7
 
 Saves to `model/<model_name>.pt`.
 
 ### Step 3b — Fine-tune with simulation data (alternative)
 
 ```bash
-python training/finetuning_with_simulation.py <model_name> [--train_with_align]
+python training/finetuning_with_simulation.py <model_name>
 ```
 
 Uses `pretrain_dataset` for both training and EWC (instead of real TPM data). Useful for the simulation experiment in Fig. 2 of the paper.
@@ -207,7 +211,7 @@ Training datasets for reproducing figure 3-5 manuscript figures:
 
 **[https://zenodo.org/records/15545449](https://zenodo.org/records/15545449)**
 
-All weights for 
+All weights are in `models` folder.
 
 Place downloaded model weights in `model/` and data folders in the root directory (matching the `folderpath` values in the config).
 
