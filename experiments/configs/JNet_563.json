@@ -1,0 +1,193 @@
+{
+    "explanation":"pretrain with vibration, angle00",
+    "pretrained_model":"JNet_542_pretrain",
+    "params":
+        {
+            "hidden_channels_list"  : [16, 32, 64, 128, 256]                   ,
+            "attn_list"             : [false, false, false, false, false]      ,     
+            "nblocks"               : 2                                        ,     
+            "activation"            : "nn.ReLU(inplace=True)"                  ,     
+            "dropout"               : 0.5                                      ,
+            "superres"              : true                                     ,     
+            "partial"               : null                                     ,
+            "reconstruct"           : false                                    ,     
+            "apply_vq"              : false                                    ,     
+            "use_x_quantized"       : false                                    ,     
+            "threshold"             : 0.5                                      ,
+            "use_fftconv"           : true                                     ,     
+            "mu_z"                  : 1.2                                      ,
+            "sig_z"                 : 0.3                                      ,
+            "blur_mode"             : "gibsonlanni"                            , "$blur_mode"    : "`gaussian` or `gibsonlanni`"                                     ,
+            "size_x"                : 51                                       ,
+            "size_y"                : 51                                       ,
+            "size_z"                : 201                                      ,
+            "NA"                    : 0.3                                      ,
+            "wavelength"            : 0.5                                      , "$wavelength"   : "microns"                                                             ,
+            "M"                     : 25                                       , "$M"            : "magnification"                                                       ,
+            "ns"                    : 1.4                                      , "$ns"           : "specimen refractive index (RI)"                                      ,
+            "ng0"                   : 1.5                                      , "$ng0"          : "coverslip RI design value"                                           ,
+            "ng"                    : 1.5                                      , "$ng"           : "coverslip RI experimental value"                                     ,
+            "ni0"                   : 1.33                                     , "$ni0"          : "immersion medium RI design value"                                    ,
+            "ni"                    : 1.33                                     , "$ni"           : "immersion medium RI experimental value"                              ,
+            "ti0"                   : 150                                      , "$ti0"          : "microns, working distance (immersion medium thickness) design value" ,
+            "tg0"                   : 170                                      , "$tg0"          : "microns, coverslip thickness design value"                           ,
+            "tg"                    : 170                                      , "$tg"           : "microns, coverslip thickness experimental value"                     ,
+            "res_lateral"           : 0.31                                     , "$res_lateral"  : "microns"                                                             ,
+            "res_axial"             : 1.0                                      , "$res_axial"    : "microns"                                                             ,
+            "pZ"                    : 0                                        , "$pZ"           : "microns, particle distance from coverslip"                           ,
+            "bet_z"                 : 30.0                                     ,
+            "bet_xy"                : 3.0                                      ,
+            "poisson_weight"        : 0.1                                      ,
+            "sig_eps"               : 0.01                                     ,
+            "background"            : 0.01                                     ,
+            "scale"                 : 3                                       ,
+            "mid"                   : 40                                       , "$mid"                   : "num of NeurIPSF middle channel"     ,
+            "loss_fn"               : "nn.MSELoss()"                           , "$loss_fn"               : "loss func for NeurIPSF"             ,  
+            "lr"                    : 1e-2                                     , "$lr"                    : "lr for pre-training NeurIPSF"       ,
+            "num_iter_psf_pretrain" : 20000                                    , "$num_iter_psf_pretrain" : "epoch for pre-training of NeurIPSF" ,
+            "nipsf_loss_target"     : 1e-5                                     , "$nipsf_loss_target"     : "epoch for pre-training of NeurIPSF" ,
+            "device"                : "cuda"
+        }                                                                      ,  "$params" : "model configs",
+
+    "pretrain_dataset":
+        {
+            "folderpath"   : "_var_num_realisticdata3" ,
+            "labelname"    : "_label"                  ,
+            "size"         : [1200, 500, 500]          ,
+            "cropsize"     : [ 240, 112, 112]          ,
+            "I"            : 200                       ,
+            "low"          : 0                         ,
+            "high"         : 16                        ,
+            "scale"        : 3                         ,
+            "mask"         : true                      ,
+            "mask_size"    : [1, 10, 10]               ,
+            "mask_num"     : 30                        ,
+            "surround"     : false                     ,
+            "surround_size": [32, 4, 4]          
+        }                                                                      , "pre$train_dataset comments" :"pretrain_dataset configs",
+
+    "pretrain_val_dataset":
+        {
+            "folderpath"   : "_var_num_realisticdata3" ,
+            "labelname"    : "_label"                  ,
+            "size"         : [1200, 500, 500]          ,
+            "cropsize"     : [ 240, 112, 112]          ,
+            "I"            : 20                        ,
+            "low"          : 16                        ,
+            "high"         : 20                        ,
+            "scale"        : 3                         ,
+            "mask"         : false                     ,
+            "mask_size"    : [1, 10, 10]               ,
+            "mask_num"     : false                     ,
+            "surround"     : false                     ,
+            "surround_size": [32, 4, 4]                ,
+            "seed"         : 907
+        }                                                                      , "$pretrain_val_dataset" : "pretraining validation_dataset configs",
+
+    "pretrain_loop":
+        {
+           "batch_size"        : 1                   ,
+           "n_epochs"          : 100                 ,
+           "lr"                : 1e-3                ,
+           "loss_fnx"          : "nn.BCELoss()"      ,
+           "loss_fnz"          : "nn.BCELoss()"      ,
+           "path"              : "model"             ,
+           "savefig_path"      : "train"             ,
+           "partial"           : "params['partial']" ,
+           "ewc"               : null                ,
+           "es_patience"       : 10                  ,
+           "is_vibrate"        : true                ,
+           "weight_x"          : 1                   ,
+           "weight_z"          : 1                   ,
+           "without_noise"     : false                                           
+        }                                                                      , "$pretrain_loop" : "",
+
+    "simulation_data_generation":
+        {
+            "dataset_name"         : "_var_num_realisticdata3" ,
+            "train_num"            : 16                        ,
+            "valid_num"            : 4                         ,
+            "image_size"           : [1200, 500, 500]          ,
+            "train_object_num_min" : 1500                      ,
+            "train_object_num_max" : 2500                      ,
+            "valid_object_num_min" : 1500                      ,
+            "valid_object_num_max" : 2500
+        }                                                                      , "$simulation_data_generation":"",
+
+    "train_dataset":
+        {
+            "folderpath"      : "/home/haruhiko/Documents/simulation_ad2/blurred_new/angle00"         ,
+            "size"            : [900, 900, 900]                  ,
+            "cropsize"        : [240, 112, 112]                   ,
+            "I"               : 200                               ,
+            "scale"           : 3                                 ,
+            "train"           : true                              ,
+            "mask"            : true                              ,
+            "mask_size"       : [1, 10, 10]                       ,
+            "mask_num"        : 10                                ,
+            "surround"        : false                             ,
+            "surround_size"   : [32, 4, 4]                                
+        }                                                                      , "$train_dataset" : "",
+
+    "val_dataset":
+        {
+            "folderpath"      : "/home/haruhiko/Documents/simulation_ad2/blurred_new/angle00"         ,
+            "size"            : [900, 900, 900]                  ,
+            "cropsize"        : [240, 112, 112]                   ,
+            "I"               : 20                                ,
+            "scale"           : 3                                 ,
+            "train"           : false                             ,
+            "mask"            : false                             ,
+            "mask_size"       : [1, 10, 10]                       ,
+            "mask_num"        : 10                                ,
+            "surround"        : false                             ,
+            "surround_size"   : [32, 4, 4]                        ,
+            "seed"            : 1204                                      
+        }                                                                      , "$val_dataset" : "",
+    
+        "vibration":
+        {
+            "max_step"              : 60                          ,
+            "b_sigma"               : {"min" : 0   , "max" : 0.2} ,
+            "amp_alpha"             : {"min" : 0   , "max" : 2  } ,
+            "omega_alpha"           : {"min" : 0   , "max" : 2  } ,
+            "noise_inv_var_alpha"   : {"min" : 2   , "max" : 10 }
+        }                                                                      , "$vibration" : "",
+
+    "train_loop":
+        {
+            "batch_size"        : 1              ,
+            "n_epochs"          : 100            ,
+            "lr"                : 1e-3           ,
+            "loss_fn"           : "nn.MSELoss()" ,
+            "path"              : "model"        ,
+            "savefig_path"      : "train"        ,
+            "partial"           : null           ,
+            "ewc"               : true           ,
+            "params"            : "params"       ,
+            "es_patience"       : 10             ,
+            "reconstruct"       : true           ,
+            "is_instantblur"    : false          ,
+            "is_vibrate"        : false          ,
+            "adjust_luminance"  : false          ,
+            "zloss_weight"      : 1              ,
+            "ewc_weight"        : 0.1            ,
+            "qloss_weight"      : 1              ,
+            "ploss_weight"      : 10.0           ,
+            "mrfloss_order"     : 1              ,
+            "mrfloss_dilation"  : 1              ,
+            "mrfloss_weights"   : {"l_00" : -0.5  ,
+                                   "l_01" :  0.5  ,
+                                   "l_10" :  1.0  ,
+                                   "l_11" : -1.0
+                                   }                                                  
+        }                                                                      , "$train_loop" : "",
+    
+    "visualization":
+            {   "path"          : "experiments/images" ,
+                "z_stack"       : 12                   ,
+                "x_slice"       : 64                   ,
+                "mip"           : 12
+            }
+        
+    }

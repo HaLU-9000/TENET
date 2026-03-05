@@ -27,6 +27,9 @@ This self-supervised reconstruction loop requires only raw TPM volumes — no pa
 - **Validated** on synthetic phantoms, fluorescent beads, and in vivo microglia; outperforms RLTV, CARE, and Neuroclear
 
 ---
+## Inference Demo
+
+You can try out our method on Google Colab. [link](https://colab.research.google.com/drive/1hAag7UUb0IzPKPj9rSL_946QLm_n3iHW?usp=sharing)
 
 
 ## Getting Started
@@ -131,10 +134,10 @@ Uses `train_dataset`, `val_dataset`, `pretrain_dataset` (for EWC), and `train_lo
 
 ```bash
 # Standard fine-tuning
-python training/finetuning.py JNet_beads
+python training/finetuning.py <model_name>
 
 # Cross-validation fold 1
-python training/finetuning.py JNet_beads
+python training/finetuning.py <model_name>
 
 Saves to `model/<model_name>.pt`.
 
@@ -148,7 +151,12 @@ Uses `pretrain_dataset` for both training and EWC (instead of real TPM data). Us
 
 ### Step 4 — Run inference
 
-Inference is class-based. Use the appropriate class from `inference/inference.py` depending on your data type:
+```bash
+# standard inference
+!python apply.py <model_name> -image_name $image_name
+```
+
+Or use the appropriate class from `inference/inference.py` depending on your data type:
 
 | Class | Use case |
 |---|---|
