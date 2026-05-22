@@ -529,20 +529,17 @@ class ImageProcessing():
         return padded
     
     def _remove_margin(self, chunk, margin):
+        if hasattr(margin, "shape"):
+            z, x, y = margin.shape
+        else:
+            z, x, y = (int(m) for m in margin)
+        if z == 0 and x == 0 and y == 0:
+            return chunk
         padded = torch.zeros(chunk.shape)
-        z, x, y = margin.shape
-        padded[
-            :,
-            z : -z ,
-            x : -x ,
-            y : -y ,
-               ] += chunk[     
-            :,
-            z : -z ,
-            x : -x ,
-            y : -y ,
-               ]
-        
+        sl_z = slice(z, -z if z > 0 else None)
+        sl_x = slice(x, -x if x > 0 else None)
+        sl_y = slice(y, -y if y > 0 else None)
+        padded[:, sl_z, sl_x, sl_y] += chunk[:, sl_z, sl_x, sl_y]
         return padded
 
     
